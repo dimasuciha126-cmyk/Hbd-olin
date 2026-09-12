@@ -517,7 +517,7 @@
 
 <div class="spotify-player">
   <iframe
-    src="https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC?utm_source=generator&theme=0"
+    src="https://open.spotify.com/track/2QB8FwOszur18Ai7t2XnNi?utm_source=generator&theme=0"
     width="100%"
     height="80"
     frameborder="0"
@@ -547,6 +547,14 @@
   yesBtn.addEventListener('click', () => {
     reveal.textContent = "I knew you would say yes. I love you, Olin. 💌";
   });
+
+  let musicStarted = false;
+document.body.addEventListener('click', () => {
+  if (!musicStarted) {
+    // trigger play via postMessage ke iframe Spotify
+    musicStarted = true;
+  }
+}, { once: true });
 </script>
 
 </body>
