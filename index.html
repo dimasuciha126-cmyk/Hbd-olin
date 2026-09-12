@@ -88,11 +88,14 @@
 
   .sticker-rose{
     position:absolute;
-    top: 44px;
-    right: 28px;
-    font-size: 30px;
-    transform: rotate(12deg);
+    top: 40px;
+    right: 24px;
+    width: 58px;
+    height: 58px;
+    transform: rotate(10deg) scale(1.6);
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.22));
   }
+  .sticker-rose svg{ width:100%; height:100%; overflow: visible; }
 
   /* ---------- polaroid ---------- */
   .polaroid{
@@ -164,11 +167,22 @@
     margin: 0 0 18px;
   }
 
-  .emoji-deco{
-    font-size: 26px;
-    text-align: right;
-    margin: -6px 6px 18px 0;
+  .sticker-deco{
+    display:flex;
+    justify-content: flex-end;
+    margin: -6px 4px 18px 0;
+    overflow: visible;
   }
+  .sticker-deco svg{
+    width: 48px;
+    height: 48px;
+    overflow: visible;
+    filter: drop-shadow(0 3px 5px rgba(0,0,0,0.2));
+  }
+  /* transform doesn't affect document flow, so scaling up here won't shift spacing */
+  .sticker-deco.rot-a svg{ transform: rotate(-8deg) scale(2.1); }
+  .sticker-deco.rot-b svg{ transform: rotate(6deg) scale(1.6); }
+  .sticker-deco.rot-c svg{ transform: rotate(-4deg) scale(2.1); }
 
   /* ---------- finale ---------- */
   .finale{
@@ -249,7 +263,64 @@
 <div class="page">
 
   <header class="hero">
-    <span class="sticker-rose">🌹</span>
+    <span class="sticker-rose">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="leafGrad2" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#93ac68"/>
+            <stop offset="100%" stop-color="#526b34"/>
+          </linearGradient>
+          <linearGradient id="petalOuter" x1="0.2" y1="0" x2="0.8" y2="1">
+            <stop offset="0%" stop-color="#a52d43"/>
+            <stop offset="45%" stop-color="#8a1f34"/>
+            <stop offset="100%" stop-color="#5c1224"/>
+          </linearGradient>
+          <linearGradient id="petalMid" x1="0.2" y1="0" x2="0.8" y2="1">
+            <stop offset="0%" stop-color="#e0637a"/>
+            <stop offset="50%" stop-color="#c23c52"/>
+            <stop offset="100%" stop-color="#8a1f34"/>
+          </linearGradient>
+          <linearGradient id="petalBud" x1="0.3" y1="0" x2="0.7" y2="1">
+            <stop offset="0%" stop-color="#f6c9d2"/>
+            <stop offset="60%" stop-color="#e88298"/>
+            <stop offset="100%" stop-color="#b8455c"/>
+          </linearGradient>
+        </defs>
+
+        <ellipse cx="50" cy="86" rx="24" ry="7" fill="#000" opacity="0.1"/>
+        <path d="M50 66 C36 68 24 76 20 88 C30 84 40 83 50 90 C60 83 70 84 80 88 C76 76 64 68 50 66 Z" fill="url(#leafGrad2)"/>
+        <path d="M50 62 C46 68 40 72 34 73" stroke="#3f5527" stroke-width="1.2" fill="none" opacity="0.6"/>
+        <path d="M50 62 C54 68 60 72 66 73" stroke="#3f5527" stroke-width="1.2" fill="none" opacity="0.6"/>
+
+        <g transform="translate(50 46)">
+          <g fill="url(#petalOuter)">
+            <path d="M0 4 C-13 2 -21 -10 -16 -24 C-12 -34 -3 -37 0 -30 C3 -37 12 -34 16 -24 C21 -10 13 2 0 4 Z" transform="rotate(0)"/>
+            <path d="M0 4 C-13 2 -21 -10 -16 -24 C-12 -34 -3 -37 0 -30 C3 -37 12 -34 16 -24 C21 -10 13 2 0 4 Z" transform="rotate(60)"/>
+            <path d="M0 4 C-13 2 -21 -10 -16 -24 C-12 -34 -3 -37 0 -30 C3 -37 12 -34 16 -24 C21 -10 13 2 0 4 Z" transform="rotate(120)"/>
+            <path d="M0 4 C-13 2 -21 -10 -16 -24 C-12 -34 -3 -37 0 -30 C3 -37 12 -34 16 -24 C21 -10 13 2 0 4 Z" transform="rotate(180)"/>
+            <path d="M0 4 C-13 2 -21 -10 -16 -24 C-12 -34 -3 -37 0 -30 C3 -37 12 -34 16 -24 C21 -10 13 2 0 4 Z" transform="rotate(240)"/>
+            <path d="M0 4 C-13 2 -21 -10 -16 -24 C-12 -34 -3 -37 0 -30 C3 -37 12 -34 16 -24 C21 -10 13 2 0 4 Z" transform="rotate(300)"/>
+          </g>
+
+          <g fill="url(#petalMid)">
+            <path d="M0 2 C-9 1 -15 -8 -11 -17 C-8 -24 -2 -26 0 -21 C2 -26 8 -24 11 -17 C15 -8 9 1 0 2 Z" transform="rotate(36)"/>
+            <path d="M0 2 C-9 1 -15 -8 -11 -17 C-8 -24 -2 -26 0 -21 C2 -26 8 -24 11 -17 C15 -8 9 1 0 2 Z" transform="rotate(108)"/>
+            <path d="M0 2 C-9 1 -15 -8 -11 -17 C-8 -24 -2 -26 0 -21 C2 -26 8 -24 11 -17 C15 -8 9 1 0 2 Z" transform="rotate(180)"/>
+            <path d="M0 2 C-9 1 -15 -8 -11 -17 C-8 -24 -2 -26 0 -21 C2 -26 8 -24 11 -17 C15 -8 9 1 0 2 Z" transform="rotate(252)"/>
+            <path d="M0 2 C-9 1 -15 -8 -11 -17 C-8 -24 -2 -26 0 -21 C2 -26 8 -24 11 -17 C15 -8 9 1 0 2 Z" transform="rotate(324)"/>
+          </g>
+
+          <g fill="url(#petalBud)">
+            <path d="M0 1 C-5 0 -8 -5 -6 -9 C-4 -13 -1 -14 0 -11 C1 -14 4 -13 6 -9 C8 -5 5 0 0 1 Z" transform="rotate(20)"/>
+            <path d="M0 1 C-5 0 -8 -5 -6 -9 C-4 -13 -1 -14 0 -11 C1 -14 4 -13 6 -9 C8 -5 5 0 0 1 Z" transform="rotate(150)"/>
+            <path d="M0 1 C-5 0 -8 -5 -6 -9 C-4 -13 -1 -14 0 -11 C1 -14 4 -13 6 -9 C8 -5 5 0 0 1 Z" transform="rotate(280)"/>
+          </g>
+
+          <circle cx="0" cy="-3" r="3.4" fill="#7c1f30"/>
+          <ellipse cx="-1.2" cy="-4.2" rx="1.1" ry="0.7" fill="#f4b6c3" opacity="0.7"/>
+        </g>
+      </svg>
+    </span>
     <span class="tape-label">LOVE ALBUM</span>
     <h1 class="title">Olin</h1>
     <p class="curated">Curated by Nara</p>
@@ -268,7 +339,30 @@
     <h2 class="entry-title">How We Started</h2>
     <p>We met during an unexpected random moment when a simple like turned into a match. I never thought you'd text first, but that day changed everything and time just flew by.</p>
     <p>Pure magic since August 30th, creating unforgettable memories together.</p>
-    <div class="emoji-deco">🦋</div>
+    <div class="sticker-deco rot-a">
+      <svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="wingTop" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f4c9d6"/>
+            <stop offset="50%" stop-color="#d98fa8"/>
+            <stop offset="100%" stop-color="#8f5c8e"/>
+          </linearGradient>
+          <linearGradient id="wingBottom" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#e7b4c9"/>
+            <stop offset="100%" stop-color="#a56b95"/>
+          </linearGradient>
+        </defs>
+        <path d="M50 30 C42 10 20 4 10 12 C2 18 6 34 20 38 C30 41 44 36 50 30 Z" fill="url(#wingTop)"/>
+        <path d="M50 30 C58 10 80 4 90 12 C98 18 94 34 80 38 C70 41 56 36 50 30 Z" fill="url(#wingTop)"/>
+        <path d="M50 34 C44 42 30 52 20 50 C12 48 12 60 22 64 C32 68 44 58 50 46 Z" fill="url(#wingBottom)"/>
+        <path d="M50 34 C56 42 70 52 80 50 C88 48 88 60 78 64 C68 68 56 58 50 46 Z" fill="url(#wingBottom)"/>
+        <ellipse cx="20" cy="24" rx="5" ry="8" fill="#fff" opacity="0.35"/>
+        <ellipse cx="80" cy="24" rx="5" ry="8" fill="#fff" opacity="0.35"/>
+        <path d="M50 18 C49 30 49 48 50 60" stroke="#4a2f45" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M50 20 C46 14 40 10 36 10" stroke="#4a2f45" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M50 20 C54 14 60 10 64 10" stroke="#4a2f45" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
   </section>
 
   <figure class="polaroid rot-r">
@@ -282,7 +376,21 @@
     <div class="washi"></div>
     <h2 class="entry-title">Favorite Memories</h2>
     <p>That one time we played games together, laughed endlessly, and had so much fun as if the whole world belonged only to the two of us.</p>
-    <div class="emoji-deco">🧡</div>
+    <div class="sticker-deco rot-b">
+      <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="woodHeart" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#e6b98a"/>
+            <stop offset="45%" stop-color="#c98f5c"/>
+            <stop offset="100%" stop-color="#9c6437"/>
+          </linearGradient>
+        </defs>
+        <path d="M50 82 C20 60 4 42 4 24 C4 8 18 -2 32 4 C42 8 48 18 50 26 C52 18 58 8 68 4 C82 -2 96 8 96 24 C96 42 80 60 50 82 Z" fill="url(#woodHeart)"/>
+        <path d="M20 20 C28 26 34 34 38 44" stroke="#7a4c26" stroke-width="1.4" opacity="0.5" fill="none"/>
+        <path d="M64 18 C58 26 54 36 52 48" stroke="#7a4c26" stroke-width="1.4" opacity="0.5" fill="none"/>
+        <path d="M10 26 C10 16 18 8 28 8" stroke="#f2d3ab" stroke-width="2.5" fill="none" opacity="0.6" stroke-linecap="round"/>
+      </svg>
+    </div>
   </section>
 
   <figure class="polaroid rot-l">
@@ -302,7 +410,37 @@
     <h2 class="entry-title">What I Love</h2>
     <p>I love how you laugh, care for me, share countless stories, and connect with me through so many things we have in common. And above all, I truly adore the sound of your voice.</p>
     <p>I know I'm not always sensitive enough to realize when you need space to vent or just be alone. I hold on so tightly because I don't want to miss a single second with you. Forgive me if I seem selfish at times, but I truly love you so much.</p>
-    <div class="emoji-deco">🌿</div>
+    <div class="sticker-deco rot-c">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="petalGrad2" cx="50%" cy="80%" r="90%">
+            <stop offset="0%" stop-color="#f6d9e6"/>
+            <stop offset="55%" stop-color="#e6a8c4"/>
+            <stop offset="100%" stop-color="#c072a0"/>
+          </radialGradient>
+          <radialGradient id="centerGrad" cx="40%" cy="35%" r="70%">
+            <stop offset="0%" stop-color="#ffe9a8"/>
+            <stop offset="100%" stop-color="#e8b754"/>
+          </radialGradient>
+          <linearGradient id="stemGrad2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#8ca35f"/>
+            <stop offset="100%" stop-color="#556b36"/>
+          </linearGradient>
+        </defs>
+        <path d="M50 58 C48 70 46 84 44 96" stroke="url(#stemGrad2)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <path d="M47 78 C40 76 34 78 30 84" stroke="url(#stemGrad2)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <ellipse cx="30" cy="84" rx="8" ry="4" fill="url(#stemGrad2)" transform="rotate(-20 30 84)"/>
+        <g transform="translate(50 40)">
+          <ellipse rx="17" ry="22" cx="0" cy="-20" fill="url(#petalGrad2)"/>
+          <ellipse rx="17" ry="22" cx="19" cy="-6" fill="url(#petalGrad2)" transform="rotate(72 19 -6)"/>
+          <ellipse rx="17" ry="22" cx="12" cy="17" fill="url(#petalGrad2)" transform="rotate(144 12 17)"/>
+          <ellipse rx="17" ry="22" cx="-12" cy="17" fill="url(#petalGrad2)" transform="rotate(216 -12 17)"/>
+          <ellipse rx="17" ry="22" cx="-19" cy="-6" fill="url(#petalGrad2)" transform="rotate(288 -19 -6)"/>
+          <circle r="10" fill="url(#centerGrad)"/>
+          <circle r="10" fill="none" stroke="#c98f3a" stroke-width="0.6" opacity="0.5"/>
+        </g>
+      </svg>
+    </div>
   </section>
 
   <div class="divider"></div>
