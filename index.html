@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Olin — Curated by Nara</title>
+<title>Happy Birthday Olin — Curated by Nara</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Caveat:wght@500;700&display=swap');
 
@@ -40,6 +40,72 @@
     max-width: 480px;
     margin: 0 auto;
     padding-bottom: 60px;
+    transition: opacity 0.8s ease;
+  }
+  .page.hidden{
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* ---------- envelope intro ---------- */
+  #envelopeScreen{
+    position: fixed;
+    inset: 0;
+    background: var(--paper);
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(0,0,0,0.03) 0, transparent 40%),
+      radial-gradient(circle at 80% 90%, rgba(0,0,0,0.03) 0, transparent 40%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    cursor: pointer;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+  }
+  #envelopeScreen.opened{
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .envelope-wrap{
+    text-align: center;
+    padding: 20px;
+  }
+  .envelope-svg{
+    width: 150px;
+    height: auto;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+    animation: floatEnv 3s ease-in-out infinite;
+  }
+  @keyframes floatEnv{
+    0%, 100%{ transform: translateY(0); }
+    50%{ transform: translateY(-8px); }
+  }
+  .envelope-label{
+    display:inline-block;
+    background: var(--rose);
+    color: var(--cream-card);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    padding: 6px 18px;
+    transform: rotate(-2deg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    margin-bottom: 22px;
+  }
+  .envelope-text{
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--rose-deep);
+    margin-top: 22px;
+  }
+  .envelope-hint{
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+    margin-top: 8px;
   }
 
   /* ---------- header ---------- */
@@ -179,7 +245,6 @@
     overflow: visible;
     filter: drop-shadow(0 3px 5px rgba(0,0,0,0.2));
   }
-  /* transform doesn't affect document flow, so scaling up here won't shift spacing */
   .sticker-deco.rot-a svg{ transform: rotate(-8deg) scale(2.1); }
   .sticker-deco.rot-b svg{ transform: rotate(6deg) scale(1.6); }
   .sticker-deco.rot-c svg{ transform: rotate(-4deg) scale(2.1); }
@@ -257,53 +322,49 @@
     *{ transition: none !important; }
   }
 
-  .music-toggle{
-    position: fixed;
-    bottom: 22px;
-    right: 22px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: var(--rose-deep);
-    color: var(--cream-card);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-    z-index: 999;
-  }
-  .music-toggle.spinning{
-    animation: spin 4s linear infinite;
-  }
-  @keyframes spin{
-    from{ transform: rotate(0deg); }
-    to{ transform: rotate(360deg); }
-  }
   .spotify-player{
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 92%;
-  max-width: 420px;
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 10px 28px rgba(0,0,0,0.28);
-  z-index: 999;
-  background: var(--cream-card);
-}
-.spotify-player iframe{
-  display: block;
-  border-radius: 14px;
-}
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92%;
+    max-width: 420px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.28);
+    z-index: 999;
+    background: var(--cream-card);
+    min-height: 0;
+    transition: min-height 0.3s ease;
+  }
+  .spotify-player iframe{
+    display: block;
+    border-radius: 14px;
+  }
 </style>
 </head>
 <body>
 
-<div class="page">
+<!-- ================= ENVELOPE INTRO ================= -->
+<div id="envelopeScreen">
+  <div class="envelope-wrap">
+    <span class="envelope-label">HAPPY BIRTHDAY</span>
+    <br>
+    <svg class="envelope-svg" viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+      <rect x="5" y="15" width="190" height="120" rx="4" fill="#f4dde1" stroke="#b96b74" stroke-width="2"/>
+      <path d="M5 15 L100 85 L195 15" fill="none" stroke="#b96b74" stroke-width="2"/>
+      <path d="M5 135 L75 65" fill="none" stroke="#b96b74" stroke-width="1.5" opacity="0.5"/>
+      <path d="M195 135 L125 65" fill="none" stroke="#b96b74" stroke-width="1.5" opacity="0.5"/>
+      <circle cx="100" cy="70" r="14" fill="#cf8b93"/>
+      <text x="100" y="75" font-size="14" text-anchor="middle" fill="#fffcf5">♥</text>
+    </svg>
+    <p class="envelope-text">Happy Birthday, Olin</p>
+    <p class="envelope-hint">tap untuk membuka</p>
+  </div>
+</div>
+
+<!-- ================= MAIN CONTENT ================= -->
+<div class="page hidden" id="pageContent">
 
   <header class="hero">
     <span class="sticker-rose">
@@ -364,10 +425,10 @@
         </g>
       </svg>
     </span>
-    <span class="tape-label">LOVE ALBUM</span>
+    <span class="tape-label">HAPPY BIRTHDAY</span>
     <h1 class="title">Olin</h1>
     <p class="curated">Curated by Nara</p>
-    <span class="vol">VOL. 01 / ORIGINAL</span>
+    <span class="vol">VOL. 01 / BIRTHDAY EDITION</span>
   </header>
 
   <figure class="polaroid rot-l">
@@ -502,7 +563,7 @@
       <figcaption>Forever</figcaption>
     </figure>
 
-    <p class="question">Are you ready for the next chapter?</p>
+    <p class="question">Ready for another year of us?</p>
 
     <div class="btn-row" id="btnRow">
       <button id="yesBtn">Yes</button>
@@ -512,23 +573,36 @@
     <p class="reveal" id="reveal"></p>
   </section>
 
-  <footer class="credit">made with love</footer>
+  <footer class="credit">made with love — happy birthday, Olin 🎂</footer>
 </div>
 
-<div class="spotify-player">
-  <iframe
-    src="https://open.spotify.com/embed/track/2QB8FwOszur18Ai7t2XnNi?utm_source=generator&theme=0"
-    width="100%"
-    height="80"
-    frameborder="0"
-    allowfullscreen=""
-    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-    loading="lazy"
-    title="Musik latar">
-  </iframe>
-</div>
+<!-- Spotify player: mulai kosong, iframe disuntik saat amplop diklik agar dianggap "user gesture" oleh browser -->
+<div class="spotify-player" id="spotifyPlayer"></div>
 
 <script>
+  // ---------- Envelope intro: buka amplop + suntik & mainkan musik ----------
+  const envelopeScreen = document.getElementById('envelopeScreen');
+  const pageContent = document.getElementById('pageContent');
+  const spotifyPlayer = document.getElementById('spotifyPlayer');
+
+  envelopeScreen.addEventListener('click', () => {
+    envelopeScreen.classList.add('opened');
+    pageContent.classList.remove('hidden');
+
+    // Iframe dibuat DI DALAM handler klik ini supaya browser masih menganggap
+    // ini bagian dari interaksi user (diperlukan agar autoplay diizinkan).
+    const iframe = document.createElement('iframe');
+    iframe.src = "https://open.spotify.com/embed/track/2QB8FwOszur18Ai7t2XnNi?utm_source=generator&theme=0&autoplay=1";
+    iframe.width = "100%";
+    iframe.height = "80";
+    iframe.frameBorder = "0";
+    iframe.allow = "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
+    iframe.loading = "lazy";
+    iframe.title = "Musik latar — Reality Club, Anything You Want";
+    spotifyPlayer.appendChild(iframe);
+  }, { once: true });
+
+  // ---------- Tombol Yes / No ----------
   const noBtn = document.getElementById('noBtn');
   const btnRow = document.getElementById('btnRow');
   const yesBtn = document.getElementById('yesBtn');
@@ -545,16 +619,8 @@
   noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); dodge(); });
 
   yesBtn.addEventListener('click', () => {
-    reveal.textContent = "I knew you would say yes. I love you, Olin. 💌";
+    reveal.textContent = "Happy Birthday, Olin. I love you so much. 💌🎂";
   });
-
-  let musicStarted = false;
-document.body.addEventListener('click', () => {
-  if (!musicStarted) {
-    // trigger play via postMessage ke iframe Spotify
-    musicStarted = true;
-  }
-}, { once: true });
 </script>
 
 </body>
