@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olin — Curated by Nara</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Caveat:wght@500;700&display=swap');
+
+  :root{
+    --paper: #f4ecdd;
+    --paper-dark: #e9dcc4;
+    --ink: #3c332a;
+    --ink-soft: #6b5f52;
+    --rose: #cf8b93;
+    --rose-deep: #b96b74;
+    --pink-panel: #f4dde1;
+    --sage: #93a07a;
+    --cream-card: #fffcf5;
+    --tape: rgba(207,139,147,0.55);
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--paper);
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(0,0,0,0.03) 0, transparent 40%),
+      radial-gradient(circle at 80% 90%, rgba(0,0,0,0.03) 0, transparent 40%);
+    color: var(--ink);
+    font-family: 'Space Mono', monospace;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page{
+    max-width: 480px;
+    margin: 0 auto;
+    padding-bottom: 60px;
+  }
+
+  /* ---------- header ---------- */
+  header.hero{
+    position: relative;
+    padding: 56px 32px 40px;
+    text-align: center;
+  }
+
+  .tape-label{
+    display:inline-block;
+    background: var(--rose);
+    color: var(--cream-card);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    padding: 6px 18px;
+    transform: rotate(-2deg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    margin-bottom: 22px;
+  }
+
+  h1.title{
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 52px;
+    margin: 0 0 14px;
+    letter-spacing: 0.02em;
+  }
+
+  .curated{
+    font-family: 'Caveat', cursive;
+    font-size: 26px;
+    color: var(--ink-soft);
+    margin: 0 0 18px;
+  }
+
+  .vol{
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--rose-deep);
+    border-top: 1px solid var(--rose);
+    border-bottom: 1px solid var(--rose);
+    display:inline-block;
+    padding: 6px 0;
+  }
+
+  .sticker-rose{
+    position:absolute;
+    top: 44px;
+    right: 28px;
+    font-size: 30px;
+    transform: rotate(12deg);
+  }
+
+  /* ---------- polaroid ---------- */
+  .polaroid{
+    background: var(--cream-card);
+    padding: 14px 14px 34px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.16);
+    width: 82%;
+    margin: 0 auto 44px;
+    position: relative;
+  }
+  .polaroid.rot-l{ transform: rotate(-3deg); }
+  .polaroid.rot-r{ transform: rotate(2.5deg); }
+
+  .polaroid img{
+    display:block;
+    width:100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    background: linear-gradient(135deg,#ddd3bd,#c9bda0);
+  }
+
+  .polaroid figcaption{
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    text-align:center;
+    color: var(--ink-soft);
+    margin-top: 12px;
+  }
+
+  /* ---------- section divider (torn paper) ---------- */
+  .divider{
+    height: 70px;
+    background: var(--pink-panel);
+    position: relative;
+    margin-bottom: 4px;
+    clip-path: polygon(0 0,100% 0,100% 78%,96% 100%,90% 76%,84% 100%,78% 78%,72% 100%,66% 76%,60% 100%,54% 78%,48% 100%,42% 76%,36% 100%,30% 78%,24% 100%,18% 76%,12% 100%,6% 78%,0 100%);
+  }
+
+  /* ---------- washi tape on sections ---------- */
+  .washi{
+    width: 70px;
+    height: 22px;
+    background: var(--tape);
+    margin: 0 0 -12px 28px;
+    transform: rotate(-4deg);
+    position: relative;
+    z-index: 2;
+  }
+
+  section.entry{
+    padding: 34px 32px 10px;
+  }
+
+  h2.entry-title{
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: 34px;
+    color: var(--rose-deep);
+    margin: 8px 0 20px;
+    text-decoration: underline;
+    text-decoration-color: var(--rose);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+  }
+
+  section.entry p{
+    font-size: 14.5px;
+    color: var(--ink);
+    margin: 0 0 18px;
+  }
+
+  .emoji-deco{
+    font-size: 26px;
+    text-align: right;
+    margin: -6px 6px 18px 0;
+  }
+
+  /* ---------- finale ---------- */
+  .finale{
+    padding: 40px 32px 60px;
+    text-align: center;
+  }
+
+  .finale h2.entry-title{
+    font-size: 30px;
+  }
+
+  .question{
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 19px;
+    margin: 34px 0 26px;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap: 18px;
+    position: relative;
+    min-height: 70px;
+  }
+
+  button{
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 12px 30px;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+
+  #yesBtn{
+    background: var(--rose-deep);
+    color: var(--cream-card);
+    border: none;
+    box-shadow: 0 6px 14px rgba(185,107,116,0.4);
+    transition: transform 0.15s ease;
+  }
+  #yesBtn:hover{ transform: scale(1.05); }
+
+  #noBtn{
+    background: transparent;
+    color: var(--rose-deep);
+    border: 1px dashed var(--rose-deep);
+    position: relative;
+    transition: transform 0.12s ease;
+  }
+
+  .reveal{
+    margin-top: 26px;
+    font-family: 'Caveat', cursive;
+    font-size: 24px;
+    color: var(--rose-deep);
+    min-height: 30px;
+  }
+
+  footer.credit{
+    text-align:center;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.08em;
+    padding: 20px 20px 40px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="hero">
+    <span class="sticker-rose">🌹</span>
+    <span class="tape-label">LOVE ALBUM</span>
+    <h1 class="title">Olin</h1>
+    <p class="curated">Curated by Nara</p>
+    <span class="vol">VOL. 01 / ORIGINAL</span>
+  </header>
+
+  <figure class="polaroid rot-l">
+    <img src="images/us.jpg" alt="Foto Nara dan Olin bersama">
+    <figcaption>Us</figcaption>
+  </figure>
+
+  <div class="divider"></div>
+
+  <section class="entry">
+    <div class="washi"></div>
+    <h2 class="entry-title">How We Started</h2>
+    <p>We met during an unexpected random moment when a simple like turned into a match. I never thought you'd text first, but that day changed everything and time just flew by.</p>
+    <p>Pure magic since August 30th, creating unforgettable memories together.</p>
+    <div class="emoji-deco">🦋</div>
+  </section>
+
+  <figure class="polaroid rot-r">
+    <img src="images/memory1.jpg" alt="Memory pertama">
+    <figcaption>Memory #1</figcaption>
+  </figure>
+
+  <div class="divider"></div>
+
+  <section class="entry">
+    <div class="washi"></div>
+    <h2 class="entry-title">Favorite Memories</h2>
+    <p>That one time we played games together, laughed endlessly, and had so much fun as if the whole world belonged only to the two of us.</p>
+    <div class="emoji-deco">🧡</div>
+  </section>
+
+  <figure class="polaroid rot-l">
+    <img src="images/sofun.jpg" alt="Momen main bareng">
+    <figcaption>So fun</figcaption>
+  </figure>
+
+  <figure class="polaroid rot-r">
+    <img src="images/laughs.jpg" alt="Momen tertawa bareng">
+    <figcaption>Laughs</figcaption>
+  </figure>
+
+  <div class="divider"></div>
+
+  <section class="entry">
+    <div class="washi"></div>
+    <h2 class="entry-title">What I Love</h2>
+    <p>I love how you laugh, care for me, share countless stories, and connect with me through so many things we have in common. And above all, I truly adore the sound of your voice.</p>
+    <p>I know I'm not always sensitive enough to realize when you need space to vent or just be alone. I hold on so tightly because I don't want to miss a single second with you. Forgive me if I seem selfish at times, but I truly love you so much.</p>
+    <div class="emoji-deco">🌿</div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="finale">
+    <div class="washi" style="margin-left:auto;margin-right:auto;"></div>
+    <h2 class="entry-title">Happy Birthday, My Lovely Olin</h2>
+
+    <figure class="polaroid rot-l">
+      <img src="images/always.jpg" alt="Foto Olin">
+      <figcaption>Always</figcaption>
+    </figure>
+
+    <figure class="polaroid rot-r">
+      <img src="images/forever.jpg" alt="Foto Olin">
+      <figcaption>Forever</figcaption>
+    </figure>
+
+    <p class="question">Are you ready for the next chapter?</p>
+
+    <div class="btn-row" id="btnRow">
+      <button id="yesBtn">Yes</button>
+      <button id="noBtn">No</button>
+    </div>
+
+    <p class="reveal" id="reveal"></p>
+  </section>
+
+  <footer class="credit">made with love — {{DOMAIN_ATAU_NAMA}}</footer>
+</div>
+
+<script>
+  const noBtn = document.getElementById('noBtn');
+  const btnRow = document.getElementById('btnRow');
+  const yesBtn = document.getElementById('yesBtn');
+  const reveal = document.getElementById('reveal');
+
+  function dodge(){
+    const maxX = btnRow.clientWidth - noBtn.clientWidth - 20;
+    const maxY = 20;
+    const x = Math.random() * maxX - maxX / 2;
+    const y = Math.random() * maxY - maxY / 2;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  }
+  noBtn.addEventListener('mouseenter', dodge);
+  noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); dodge(); });
+
+  yesBtn.addEventListener('click', () => {
+    reveal.textContent = "I knew you would say yes. I love you, Olin. 💌";
+  });
+</script>
+
+</body>
+</html>
