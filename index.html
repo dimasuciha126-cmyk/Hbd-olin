@@ -322,24 +322,82 @@
     *{ transition: none !important; }
   }
 
-  .spotify-player{
+  .music-card{
     position: fixed;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     width: 92%;
-    max-width: 420px;
+    max-width: 380px;
     border-radius: 14px;
     overflow: hidden;
     box-shadow: 0 10px 28px rgba(0,0,0,0.28);
     z-index: 999;
     background: var(--cream-card);
-    min-height: 0;
-    transition: min-height 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
   }
-  .spotify-player iframe{
+  .music-card.shown{
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+  .music-cover{
+    width: 46px;
+    height: 46px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  }
+  .music-cover img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
-    border-radius: 14px;
+  }
+  .music-info{
+    flex: 1;
+    min-width: 0;
+  }
+  .music-title{
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 12.5px;
+    color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .music-artist{
+    font-family: 'Space Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 2px;
+  }
+  .music-toggle-btn{
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--rose-deep);
+    color: var(--cream-card);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0;
   }
 </style>
 </head>
@@ -576,31 +634,54 @@
   <footer class="credit">made with love — happy birthday, Olin 🎂</footer>
 </div>
 
-<!-- Spotify player: mulai kosong, iframe disuntik saat amplop diklik agar dianggap "user gesture" oleh browser -->
-<div class="spotify-player" id="spotifyPlayer"></div>
+<!-- Audio asli (HTML5) — didukung resmi untuk autoplay-setelah-klik di iOS Safari -->
+<audio id="bgAudio" src="audio/anything-you-want.mp3" preload="auto" loop></audio>
+
+<!-- Mini player custom: cover + judul + tombol play/pause -->
+<div class="music-card" id="musicCard">
+  <div class="music-cover">
+    <img src="images/cover.jpg" alt="Cover Anything You Want - Reality Club">
+  </div>
+  <div class="music-info">
+    <div class="music-title">Anything You Want</div>
+    <div class="music-artist">Reality Club</div>
+  </div>
+  <button class="music-toggle-btn" id="musicToggleBtn" aria-label="Putar atau jeda musik">❚❚</button>
+</div>
 
 <script>
-  // ---------- Envelope intro: buka amplop + suntik & mainkan musik ----------
+  // ---------- Envelope intro: buka amplop + mainkan audio ----------
   const envelopeScreen = document.getElementById('envelopeScreen');
   const pageContent = document.getElementById('pageContent');
-  const spotifyPlayer = document.getElementById('spotifyPlayer');
+  const bgAudio = document.getElementById('bgAudio');
+  const musicCard = document.getElementById('musicCard');
+  const musicToggleBtn = document.getElementById('musicToggleBtn');
 
   envelopeScreen.addEventListener('click', () => {
     envelopeScreen.classList.add('opened');
     pageContent.classList.remove('hidden');
+    musicCard.classList.add('shown');
 
-    // Iframe dibuat DI DALAM handler klik ini supaya browser masih menganggap
-    // ini bagian dari interaksi user (diperlukan agar autoplay diizinkan).
-    const iframe = document.createElement('iframe');
-    iframe.src = "https://open.spotify.com/embed/track/2QB8FwOszur18Ai7t2XnNi?utm_source=generator&theme=0&autoplay=1";
-    iframe.width = "100%";
-    iframe.height = "80";
-    iframe.frameBorder = "0";
-    iframe.allow = "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
-    iframe.loading = "lazy";
-    iframe.title = "Musik latar — Reality Club, Anything You Want";
-    spotifyPlayer.appendChild(iframe);
+    // audio.play() dipanggil LANGSUNG di sini (bukan di dalam setTimeout/promise lain)
+    // supaya iOS Safari menganggapnya masih bagian dari user gesture yang sama.
+    bgAudio.play().catch(() => {
+      // Kalau browser tetap menolak (jarang terjadi), tampilkan tombol play manual
+      musicToggleBtn.textContent = '▶';
+    });
   }, { once: true });
+
+  // ---------- Toggle play/pause manual di music card ----------
+  let isPlaying = true;
+  musicToggleBtn.addEventListener('click', () => {
+    if (isPlaying) {
+      bgAudio.pause();
+      musicToggleBtn.textContent = '▶';
+    } else {
+      bgAudio.play();
+      musicToggleBtn.textContent = '❚❚';
+    }
+    isPlaying = !isPlaying;
+  });
 
   // ---------- Tombol Yes / No ----------
   const noBtn = document.getElementById('noBtn');
